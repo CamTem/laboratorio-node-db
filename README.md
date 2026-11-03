@@ -17,6 +17,8 @@ Servidor listo en http://localhost:3000
 
 Busca la palabra `TODO` en el proyecto. Cada una indica el archivo y el paso de esta guía. Completa los pasos en orden.
 
+Empieza por clonar la plantilla. Al terminar, sube el código a un repositorio de tu cuenta de GitHub. El repositorio de la plantilla solo sirve para descargar el laboratorio.
+
 ## Qué hace cada pieza
 
 Cuando el navegador pide la página, el recorrido es este:
@@ -55,13 +57,23 @@ Estas herramientas ya están declaradas en `package.json`:
 
 Estos archivos ya funcionan. Léelos para entender el proyecto y déjalos como están:
 
-- `src/views/pendiente.ejs`: página de avance. Desaparece cuando tu ruta ya responde.
-- `public/css/estilos.css`: estilos de la página.
+- `public/css/estilos.css`: estilos de la tabla.
 - En `src/index.js`, el motor EJS y la carpeta `public` ya están configurados. Ahí solo harás el paso 9.
+
+## Clonar la plantilla
+
+En la terminal, clona el repositorio de la plantilla y entra a la carpeta:
+
+```powershell
+git clone https://github.com/juliomartinezpascual/lab-node-db.git
+cd lab-node-db
+```
+
+Todos los comandos siguientes se ejecutan dentro de esa carpeta. Ahí están el `README.md`, `server.js` y la carpeta `src`.
 
 ## Paso 1. Preparar Node.js e instalar
 
-Necesitas Node.js 20.19 o superior. Mongoose 9 no arranca en versiones anteriores. Compruébalo en la terminal, dentro de la carpeta del proyecto:
+Necesitas Node.js 20.19 o superior. Mongoose 9 no arranca en versiones anteriores. Compruébalo en la terminal, dentro de `lab-node-db`:
 
 ```powershell
 node -v
@@ -213,7 +225,7 @@ app.listen(PORT, () => {
 
 `PORT` sale de `.env`. Si esa variable no existe, el código usa `3000`.
 
-Comprueba: la consola muestra la conexión y la dirección. Abre `http://localhost:3000`. Debes ver la página **Laboratorio en progreso**. Esa vista EJS confirma que Express y la conexión ya funcionan.
+Comprueba: la consola muestra la conexión y la dirección. Abre `http://localhost:3000`. Debes ver el mensaje **Servidor en marcha**. Express ya responde y la conexión con Atlas está hecha.
 
 ## Paso 6. Describir a la persona
 
@@ -312,7 +324,7 @@ router.get("/", listarPersonas);
 
 Archivo: `src/index.js`
 
-Express todavía muestra la página de progreso porque esa ruta está escrita en `app.get`. Hay que entregar `/` al router de personas antes de esa página.
+Express todavía responde con el mensaje "Servidor en marcha" porque esa ruta está escrita en `app.get`. Hay que entregar `/` al router de personas antes de ese mensaje.
 
 Busca el comentario `TODO (paso 9)`. Quita `//` de estas dos líneas y déjalas donde están, encima de `app.get`:
 
@@ -321,12 +333,12 @@ const personaRoutes = require("./routes/personaRoutes");
 app.use("/", personaRoutes);
 ```
 
-El orden importa. Express usa la primera ruta que coincide. Si `app.use` queda después de `app.get`, sigues viendo la página de progreso.
+El orden importa. Express usa la primera ruta que coincide. Si `app.use` queda después de `app.get`, sigues viendo el mensaje "Servidor en marcha".
 
 Comprueba: recarga `http://localhost:3000`.
 
-- Si los pasos 6, 7 y 8 ya están escritos, la página de progreso desaparece. Aparece la tabla con los encabezados y una fila amarilla que pide completar la vista.
-- Si sigues viendo **Laboratorio en progreso**, revisa el `router.get` del paso 8 y que las dos líneas de este paso estén antes de `app.get`.
+- Si los pasos 6, 7 y 8 ya están escritos, el mensaje desaparece. Aparece la tabla con los encabezados y una fila amarilla que pide completar la vista.
+- Si sigues viendo **Servidor en marcha**, revisa el `router.get` del paso 8 y que las dos líneas de este paso estén antes de `app.get`.
 - Si la consola muestra el TODO del paso 6 o del paso 7, vuelve a ese archivo.
 
 ## Paso 10. Pintar la tabla
@@ -375,10 +387,33 @@ Comprueba: recarga el navegador. La tabla muestra las personas que guardaste en 
 ## Cómo saber que terminaste
 
 - La consola muestra la base `lab_personas` y la dirección del servidor.
-- `http://localhost:3000` muestra la tabla, no la página de progreso.
+- `http://localhost:3000` muestra la tabla, no el mensaje "Servidor en marcha".
 - Cada fila sale de MongoDB. Si borras un documento en Atlas y recargas, la fila desaparece.
 - `MONGODB_URI` en `.env` es la URL de MongoDB Atlas y empieza por `mongodb+srv://`.
 - Los `throw` de los pasos 4, 5, 6 y 7 ya no están en el código.
+- El código completado está en un repositorio de tu cuenta de GitHub.
+
+## Entrega. Subir el código a tu repositorio
+
+Cuando la tabla ya funcione, sube el laboratorio a un repositorio tuyo. La dirección `https://github.com/juliomartinezpascual/lab-node-db.git` es la plantilla: se clona al empezar y no recibe tu entrega.
+
+1. Entra a GitHub con tu cuenta y crea un repositorio nuevo. Puedes llamarlo `lab-node-db`. Créalo vacío, sin README, sin `.gitignore` y sin licencia.
+2. Copia la URL de ese repositorio. Tiene esta forma: `https://github.com/TU_USUARIO/lab-node-db.git`.
+3. En la terminal, dentro de la carpeta del laboratorio, cambia el destino y sube tu código:
+
+```powershell
+git remote set-url origin https://github.com/TU_USUARIO/lab-node-db.git
+git add .
+git commit -m "Completa el laboratorio de listado de personas"
+git push -u origin HEAD
+```
+
+Sustituye la URL por la de tu repositorio. GitHub puede pedir tu usuario y una contraseña de acceso, o abrir el inicio de sesión en el navegador.
+
+4. Abre tu repositorio en el navegador. Deben verse `server.js`, la carpeta `src` y este `README.md` con tus cambios.
+5. El archivo `.env` queda fuera del repositorio. Ahí está la clave de Atlas. `.gitignore` ya lo excluye. Antes del `git add`, ejecuta `git status`: `.env` no debe aparecer en la lista.
+
+La URL de tu repositorio es la entrega del laboratorio.
 
 ## Errores frecuentes
 
@@ -392,7 +427,7 @@ Comprueba: recarga el navegador. La tabla muestra las personas que guardaste en 
 | `IP that isn't whitelisted` | En Atlas, autoriza tu IP en Network Access. |
 | Se queda esperando y luego falla la conexión | Revisa internet, el clúster y que la URL de Atlas sea una sola línea. |
 | La consola conecta, pero el navegador no abre | Completa el `app.listen` del paso 5. |
-| Sigues viendo **Laboratorio en progreso** | Falta `router.get` o el `app.use` quedó debajo de `app.get`. |
+| Sigues viendo **Servidor en marcha** | Falta `router.get` o el `app.use` quedó debajo de `app.get`. |
 | `Failed to lookup view "personas/index"` | El `res.render` debe usar exactamente `"personas/index"`. |
 | La tabla abre y dice que no hay personas | La URL debe incluir `/lab_personas` antes del `?` y la colección debe llamarse `personas`. |
 | Las celdas salen vacías | El nombre del campo en la base y en el esquema es distinto. |

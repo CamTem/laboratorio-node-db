@@ -20,9 +20,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 // app.use("/", personaRoutes);
 
 app.get("/", (req, res) => {
-  res.render("pendiente", {
-    titulo: "Laboratorio en progreso",
-  });
+  res.send("Servidor en marcha. Sigue el README desde el paso 6 para mostrar las personas.");
 });
 
 module.exports = app;
