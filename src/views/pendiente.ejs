@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= titulo %></title>
+    <link rel="stylesheet" href="/css/estilos.css" />
+  </head>
+  <body>
+    <header class="encabezado">
+      <div class="container">
+        <p class="curso">Programación Web · Laboratorio</p>
+        <h1><%= titulo %></h1>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="tarjeta">
+        <p>
+          Express ya está sirviendo esta vista EJS. La base de datos quedó
+          conectada. El listado de personas todavía no está armado.
+        </p>
+        <p>Sigue el README desde el paso 6:</p>
+        <ol class="lista">
+          <li>Crea el modelo en <code>src/models/persona.js</code>.</li>
+          <li>Consulta y renderiza en <code>src/controllers/personaController.js</code>.</li>
+          <li>Registra <code>GET /</code> en <code>src/routes/personaRoutes.js</code>.</li>
+          <li>
+            Descomenta el router en <code>src/index.js</code>. Esas dos líneas
+            van antes de la ruta que muestra esta página.
+          </li>
+          <li>Recorre el arreglo dentro de <code>src/views/personas/index.ejs</code>.</li>
+        </ol>
+        <p class="ayuda">
+          Puedes arrancar con <code>npm run dev</code> o con <code>node server</code>.
+          Con <code>npm run dev</code> el servidor se reinicia al guardar. Con
+          <code>node server</code>, detén el proceso y vuelve a lanzarlo después
+          de cada cambio. Luego recarga el navegador.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

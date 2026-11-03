@@ -1,0 +1,31 @@
+/*
+ * Laboratorio — Listado de personas
+ * Archivo: server.js
+ * Este archivo arranca la aplicación.
+ * Tu tarea (paso 5): abrir el puerto cuando la base de datos ya esté conectada.
+ * Guía: README.md
+ */
+
+require("dotenv").config({ quiet: true });
+
+const app = require("./src/index");
+const conectarBaseDeDatos = require("./src/configurations/database");
+
+const PORT = process.env.PORT || 3000;
+
+async function iniciar() {
+  // Esta llamada ya está escrita. La conexión se completa en database.js (paso 4).
+  await conectarBaseDeDatos();
+
+  // TODO (paso 5): borra el throw y abre el puerto con app.listen(PORT, ...).
+  // Dentro del callback, muestra en consola: Servidor listo en http://localhost:PUERTO
+  throw new Error(
+    "TODO pendiente (paso 5): en server.js abre el puerto con app.listen(PORT, ...) y elimina este throw."
+  );
+}
+
+iniciar().catch((error) => {
+  console.error("No se pudo iniciar el servidor.");
+  console.error(error.message);
+  process.exit(1);
+});
