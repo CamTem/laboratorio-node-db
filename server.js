@@ -14,14 +14,13 @@ const conectarBaseDeDatos = require("./src/configurations/database");
 const PORT = process.env.PORT || 3000;
 
 async function iniciar() {
-  // Esta llamada ya está escrita. La conexión se completa en database.js (paso 4).
+  // Esta llamada conecta con MongoDB.
   await conectarBaseDeDatos();
 
-  // TODO (paso 5): borra el throw y abre el puerto con app.listen(PORT, ...).
-  // Dentro del callback, muestra en consola: Servidor listo en http://localhost:PUERTO
-  throw new Error(
-    "TODO pendiente (paso 5): en server.js abre el puerto con app.listen(PORT, ...) y elimina este throw."
-  );
+  // Iniciar el servidor.
+  app.listen(PORT, () => {
+    console.log(`Servidor listo en http://localhost:${PORT}`);
+  });
 }
 
 iniciar().catch((error) => {

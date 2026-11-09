@@ -10,7 +10,6 @@ const { listarPersonas } = require("../controllers/personaController");
 
 const router = express.Router();
 
-// TODO (paso 8): registra la ruta GET / para que use listarPersonas.
-// router.get("/", listarPersonas);
+router.get("/", listarPersonas);
 
 module.exports = router;
